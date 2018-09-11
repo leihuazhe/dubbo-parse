@@ -16,8 +16,8 @@
  */
 package com.maple.dubbo.provider;
 
-import com.alibaba.dubbo.demo.DemoService;
 import com.alibaba.dubbo.rpc.RpcContext;
+import com.maple.dubbo.api.DemoService;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
