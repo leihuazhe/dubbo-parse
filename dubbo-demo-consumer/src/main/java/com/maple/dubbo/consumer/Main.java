@@ -16,7 +16,6 @@
  */
 package com.maple.dubbo.consumer;
 
-import com.maple.dubbo.api.DemoService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Main {
@@ -25,17 +24,18 @@ public class Main {
         //Prevent to get IPV6 address,this way only work in debug mode
         //But you can pass use -Djava.net.preferIPv4Stack=true,then it work well whether in debug mode or not
         System.setProperty("java.net.preferIPv4Stack", "true");
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"META-INF/spring/dubbo-demo-consumer.xml"});
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath*:dubbo-demo-consumer.xml");
         context.start();
+
+
         // get remote service proxy
-        DemoService demoService = (DemoService) context.getBean("consumerService");
+        ConsumerService demoService = context.getBean(ConsumerService.class);
 
         while (true) {
             try {
                 Thread.sleep(1000);
-                String hello = demoService.sayHello("world"); // call remote method
-                System.out.println(hello); // get result
-
+                String hello = demoService.hello();// call remote method
+                System.out.println("返回结果: " + hello);
             } catch (Throwable throwable) {
                 throwable.printStackTrace();
             }

@@ -17,24 +17,33 @@ limitations under the License.
 -->
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:context="http://www.springframework.org/schema/context"
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.1.xsd
        http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-    <!-- provider's application name, used for tracing dependency relationship -->
-    <dubbo:application name="demo-provider"/>
+    <context:component-scan base-package="com.maple.dubbo.consumer"/>
 
-    <!-- use multicast registry center to export service -->
-    <!--<dubbo:registry address="multicast://224.5.6.7:1234"/>-->
-    <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
+    <dubbo:annotation package="com.maple.dubbo.consumer"/>
 
-    <!-- use dubbo protocol to export service on port 20880 -->
-    <dubbo:protocol name="dubbo" port="20880"/>
 
-    <!-- service implementation, as same as regular local bean -->
-    <bean id="demoService" class="com.maple.dubbo.provider.DemoServiceImpl"/>
+    <!-- consumer's application name, used for tracing dependency relationship (not a matching criterion),
+    don't set it same as provider -->
+    <dubbo:application name="demo-consumer"/>
 
-    <!-- declare the service interface to be exported -->
-    <dubbo:service interface="com.maple.dubbo.api.DemoService" ref="demoService"/>
+    <!-- use multicast registry center to discover service -->
+    <!--<dubbo:registry address="zookeeper://127.0.0.1:2181"/>-->
+    <!--<dubbo:registry address="multicast://239.255.255.250:20880"/>-->
+
+    <dubbo:registry address="multicast://224.5.6.7:1234"/>
+
+
+    <!-- generate proxy for the remote service, then demoService can be used in the same way as the
+    local regular interface -->
+    <!--<dubbo:reference id="demoService" check="false" interface="com.alibaba.dubbo.demo.DemoService" mock="true"/>-->
+
+    <!--<bean class="com.alibaba.dubbo.demo.consumer.DemoServiceMock"/>-->
 
 </beans>
