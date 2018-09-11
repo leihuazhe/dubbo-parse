@@ -7,7 +7,12 @@
     <groupId>com.maple</groupId>
     <artifactId>spring-dubbo</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
+
+    <properties>
+        <dubbo.parent.version>1.0</dubbo.parent.version>
+    </properties>
+
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -19,28 +24,30 @@
         <module>dubbo-boot-api</module>
         <module>dubbo-boot-consumer</module>
         <module>dubbo-boot-provider</module>
+
+        <module>dubbo-demo-api</module>
+        <module>dubbo-demo-consumer</module>
+        <module>dubbo-demo-provider</module>
     </modules>
 
-    <dependencies>
-        <!-- Spring Boot Dubbo 依赖 -->
-       <!-- <dependency>
-            <groupId>io.dubbo.springboot</groupId>
-            <artifactId>spring-boot-starter-dubbo</artifactId>
-            <version>1.0.0</version>
-        </dependency>-->
-
-        <dependency>
-            <groupId>com.alibaba.spring.boot</groupId>
-            <artifactId>dubbo-spring-boot-starter</artifactId>
-            <version>2.0.0</version>
-        </dependency>
+    <!-- <dependency>
+         <groupId>io.dubbo.springboot</groupId>
+         <artifactId>spring-boot-starter-dubbo</artifactId>
+         <version>1.0.0</version>
+     </dependency>-->
 
 
-        <!-- Spring Boot Web 依赖 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-    </dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>dubbo-bom</artifactId>
+                <version>2.6.1</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
 
 </project>
