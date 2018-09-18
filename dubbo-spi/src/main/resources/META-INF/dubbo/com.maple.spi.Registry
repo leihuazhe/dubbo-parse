@@ -1,0 +1,6 @@
+consul=com.maple.spi.impl.ConsulRegistry
+dapeng=com.maple.spi.impl.DapengRegistry
+etcd=com.maple.spi.impl.EtcdRegistry
+etcd2=com.maple.spi.impl.Etcd2Registry
+zookeeper=com.maple.spi.impl.ZookeeperRegistry
+common=com.maple.spi.impl.CommonRegistry
