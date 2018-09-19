@@ -134,11 +134,11 @@ public class ActivateTest {
     }
 
     /**
-     * 自动寻找适配器类
+     * 自动寻找适配器类 ===>
      */
     @Test
     public void test7() {
-        URL url = URL.valueOf("test://localhost/test").addParameter("registry1", "etcd2");
+        URL url = URL.valueOf("test://localhost/test").addParameter("registry", "etcd2");
 
         Registry registry = ExtensionLoader.getExtensionLoader(Registry.class).getAdaptiveExtension();
 

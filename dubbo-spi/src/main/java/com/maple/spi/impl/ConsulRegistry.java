@@ -2,12 +2,14 @@ package com.maple.spi.impl;
 
 
 import com.alibaba.dubbo.common.URL;
+import com.alibaba.dubbo.common.extension.Adaptive;
 import com.maple.spi.Registry;
 
 /**
  * @author maple 2018.09.16 下午4:27
  */
 //@Activate(group = {"group1", "group2"})
+//@Adaptive
 public class ConsulRegistry implements Registry {
 
     /**
