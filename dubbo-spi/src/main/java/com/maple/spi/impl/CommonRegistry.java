@@ -3,11 +3,14 @@ package com.maple.spi.impl;
 
 import com.alibaba.dubbo.common.URL;
 import com.maple.spi.Registry;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author maple 2018.09.16 下午4:27
  */
 public class CommonRegistry implements Registry {
+    private Logger logger = LoggerFactory.getLogger(CommonRegistry.class);
 
     private Registry registry;
 
@@ -23,9 +26,11 @@ public class CommonRegistry implements Registry {
      */
     @Override
     public String register(URL url, String msg) {
-        System.out.println("before ....");
+        long begin = System.currentTimeMillis();
+        logger.info("CommonRegistry before ....");
         String register = registry.register(url, msg);
-        System.out.println("after ....");
+        long end = System.currentTimeMillis();
+        logger.info("CommonRegistry after .... cost: {} ms", end - begin);
         return register;
     }
 }

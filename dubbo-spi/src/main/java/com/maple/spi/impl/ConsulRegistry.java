@@ -2,7 +2,6 @@ package com.maple.spi.impl;
 
 
 import com.alibaba.dubbo.common.URL;
-import com.alibaba.dubbo.common.extension.Activate;
 import com.maple.spi.Registry;
 
 /**

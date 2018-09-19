@@ -16,7 +16,8 @@ public interface Registry {
      * @param msg input msg
      * @return result string
      */
-    @Adaptive
+    @Adaptive()
+//    @Adaptive("registry1")
     String register(URL url, String msg);
 }
 

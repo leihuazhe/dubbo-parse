@@ -21,6 +21,10 @@ public class EtcdRegistry implements Registry {
      */
     @Override
     public String register(URL url, String msg) {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException ignored) {
+        }
 
         return "Etcd register already! ";
     }
