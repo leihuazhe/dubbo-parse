@@ -2,25 +2,27 @@ package com.maple.spi.impl;
 
 
 import com.alibaba.dubbo.common.URL;
-import com.alibaba.dubbo.common.extension.Activate;
 import com.maple.spi.Registry;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author maple 2018.09.16 下午4:27
  */
-//@Activate(group = {"default_group"})
 public class ZookeeperRegistry implements Registry {
+    private Logger logger = LoggerFactory.getLogger(ZookeeperRegistry.class);
 
-    /**
-     * register something
-     *
-     * @param msg input msg
-     * @return result string
-     */
     @Override
-    public String register(URL url, String msg) {
-        System.out.println("access in zookeepr");
+    public String register(URL url, String content) {
+        logger.info("服务: {} 已注册到zookeeper上，备注: {}", url.getParameter("service"), content);
 
         return "Zookeeper register already! ";
+    }
+
+    @Override
+    public String discovery(URL url, String content) {
+        logger.info("zookeeper上发现服务: {} , 备注: {}", url.getParameter("service"), content);
+
+        return "Zookeeper discovery already! ";
     }
 }

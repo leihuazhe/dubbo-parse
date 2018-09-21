@@ -19,6 +19,10 @@ public interface Registry {
     @Adaptive()
 //    @Adaptive("registry1")
     String register(URL url, String msg);
+
+
+    @Adaptive()
+    String discovery(URL url, String content);
 }
 
 
