@@ -1,0 +1,2 @@
+com.maple.jdk.spi.EtcdRegistry
+com.maple.jdk.spi.ZookeeperRegistry

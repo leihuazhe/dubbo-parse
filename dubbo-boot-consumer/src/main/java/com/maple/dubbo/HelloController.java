@@ -1,6 +1,7 @@
 package com.maple.dubbo;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.maple.api.CityService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,12 +10,15 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class HelloController {
-    @Autowired
-    private HelloService helloService;
+
+    @Reference(version = "${demo.service.version}",
+            application = "${dubbo.application.id}",
+            url = "${dubbo.service.url}")
+    private CityService cityService;
 
 
     @RequestMapping("/hello")
     public Object hello() {
-        return helloService.hello();
+        return cityService.findCityByName("武汉");
     }
 }

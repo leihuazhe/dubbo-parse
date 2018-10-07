@@ -9,7 +9,10 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class HelloService {
-    @Reference(url = "dubbo://127.0.0.1:20880")
+
+    @Reference(version = "${demo.service.version}",
+            application = "${dubbo.application.id}",
+            url = "${dubbo.service.url}")
     private CityService cityService;
 
     public Object hello() {

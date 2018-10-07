@@ -11,13 +11,15 @@ public class Main {
 
     public static void main(String[] args) {
         URL url = URL.valueOf("test://localhost/test").addParameter("service", "helloService")
-                .addParameter("registry","etcd");
+                /*.addParameter("registry","etcd")*/;
 
         Registry registry = ExtensionLoader.getExtensionLoader(Registry.class).getAdaptiveExtension();
 
         String register = registry.register(url, "maple");
 
         System.out.println(register);
+
+        System.out.println(ExtensionLoader.getExtensionLoader(Registry.class).getSupportedExtensions().toString());
 
     }
 }
