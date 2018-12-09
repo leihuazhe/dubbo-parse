@@ -21,4 +21,5 @@ public class CityServiceImpl implements CityService {
         System.out.println("request cityName: " + cityName);
         return new City("武汉", "湖北");
     }
+
 }
