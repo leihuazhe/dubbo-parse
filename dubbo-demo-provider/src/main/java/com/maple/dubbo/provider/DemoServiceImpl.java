@@ -18,20 +18,24 @@ package com.maple.dubbo.provider;
 
 import com.alibaba.dubbo.rpc.RpcContext;
 import com.maple.dubbo.api.DemoService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DemoServiceImpl implements DemoService {
+    private static final Logger logger = LoggerFactory.getLogger(DemoServiceImpl.class);
 
     public String sayHello(String name) {
+        logger.info("receive message name {}", name);
         System.out.println("[" + new SimpleDateFormat("HH:mm:ss").format(new Date()) + "] Hello " + name + ", request from consumer: " + RpcContext.getContext().getRemoteAddress());
         return "Hello " + name + ", response form provider: " + RpcContext.getContext().getLocalAddress();
     }
 
     @PostConstruct
-    public void init(){
+    public void init() {
         System.out.println("init");
     }
 

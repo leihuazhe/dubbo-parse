@@ -12,11 +12,12 @@ import javax.annotation.PostConstruct;
 @Component
 public class ConsumerService {
 
-    @Reference(check = false)
+    @Reference(check = false, cluster = "failover", retries = 2,loadbalance = "roundrobin")
     private DemoService demoService;
 
 
     public String hello() {
+
         return demoService.sayHello("maple");
     }
 

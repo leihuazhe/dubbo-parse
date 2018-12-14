@@ -33,7 +33,7 @@ public class Main {
 
         while (true) {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(5000);
                 String hello = demoService.hello();// call remote method
                 System.out.println("返回结果: " + hello);
             } catch (Throwable throwable) {
