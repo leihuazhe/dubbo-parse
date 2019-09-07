@@ -29,12 +29,13 @@ public class Main {
 
 
         // get remote service proxy
-        ConsumerService demoService = context.getBean(ConsumerService.class);
+//        ConsumerService demoService = context.getBean(ConsumerService.class);
+        ConsumerService consumerService = context.getBean(ConsumerService.class);
 
         while (true) {
             try {
-                Thread.sleep(5000);
-                String hello = demoService.hello();// call remote method
+                Thread.sleep(4500);
+                String hello = consumerService.hello();// call remote method
                 System.out.println("返回结果: " + hello);
             } catch (Throwable throwable) {
                 throwable.printStackTrace();

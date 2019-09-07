@@ -17,34 +17,26 @@ limitations under the License.
 -->
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
-       xmlns:context="http://www.springframework.org/schema/context"
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
-       http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context-3.1.xsd
        http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-    <context:component-scan base-package="com.maple.dubbo.consumer"/>
+    <!-- 当前应用信息配置 -->
+    <dubbo:application name="simple-registry"/>
+    <!-- 暴露服务协议配置 -->
+    <dubbo:protocol port="9090"/>
 
-    <dubbo:annotation package="com.maple.dubbo.consumer"/>
-
-
-    <!-- consumer's application name, used for tracing dependency relationship (not a matching criterion),
-    don't set it same as provider -->
-    <dubbo:application name="demo-consumer"/>
-
-    <!-- use multicast registry center to discover service -->
-    <!--<dubbo:registry address="nacos://127.0.0.1:8848"/>-->
-    <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
-    <!--<dubbo:registry address="multicast://239.255.255.250:20880"/>-->
-
-    <!--<dubbo:registry address="multicast://224.5.6.7:1234"/>-->
-
-
-    <!-- generate proxy for the remote service, then demoService can be used in the same way as the
-    local regular interface -->
-    <!--<dubbo:reference id="demoService" check="false" interface="com.alibaba.dubbo.demo.DemoService" mock="true"/>-->
-
-    <!--<bean class="com.alibaba.dubbo.demo.consumer.DemoServiceMock"/>-->
+    <!-- 暴露服务配置 -->
+    <dubbo:service interface="com.alibaba.dubbo.registry.RegistryService" ref="registryService" registry="N/A"
+                   ondisconnect="disconnect" callbacks="1000">
+        <dubbo:method name="subscribe">
+            <dubbo:argument index="1" callback="true"/>
+        </dubbo:method>
+        <dubbo:method name="unsubscribe">
+            <dubbo:argument index="1" callback="false"/>
+        </dubbo:method>
+    </dubbo:service>
+    <!-- 简单注册中心实现，可自行扩展实现集群和状态同步 -->
+    <bean id="registryService" class="com.maple.dubbo.provider.SimpleRegistryService"/>
 
 </beans>

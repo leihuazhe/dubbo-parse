@@ -18,6 +18,7 @@ package com.maple.dubbo.provider;
 
 import com.alibaba.dubbo.rpc.RpcContext;
 import com.maple.dubbo.api.DemoService;
+import com.yunji.frameworks.meta.GenServiceMetadata;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,6 +26,7 @@ import javax.annotation.PostConstruct;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+@GenServiceMetadata
 public class DemoServiceImpl implements DemoService {
     private static final Logger logger = LoggerFactory.getLogger(DemoServiceImpl.class);
 
